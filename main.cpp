@@ -61,9 +61,14 @@ int main() {
 
         }
          if (filter_choice == "1") {
-            // Grayscale filter logic here...
+                 for (int i = 0; i < primary.width; i++) {
+        for (int j = 0; j < primary.height; j++) {
+            for (int k = 0; k < primary.channels; k++) {
+            }
+        }
+                 }
             primary.saveImage("Grayscale.jpg");
         } else if (filter_choice == "3") {
-            invert_image(image_name, primary);  // Correct way to call the invert_image function
+            invert_image(image_name, primary);
         }
 }
