@@ -779,6 +779,9 @@ void adding_frame(Image& primary, string& name) {
     else if((x>1000||x<3000)&&(y>1000||y<3000)){
         frameSize = 100;
     }
+    else{
+        frameSize = 150;
+    }
     string choose;
     cout << "Height: " << x << " , Width: " << y << endl;
     cout << "1: simple frame\n";
@@ -903,3 +906,4 @@ void adding_frame(Image& primary, string& name) {
             asking_for_saving(added_frame, name);
     }
 }
+
