@@ -1,3 +1,4 @@
+
 # include <iostream>
 # include <cctype>
 # include <string>
@@ -22,9 +23,8 @@ void grayscale_image(Image& primary, string &name);
 void merge_image(Image& primary,string &name);
 void lighten_darken_image(Image &primary, string&name);
 void adding_frame(Image& primary, string& name);
-void Infra_Red(Image& primary, string& name);
-void resizing(Image& primary, string &name);
 void filter_choices(string filter_choice, Image& primary, string &name);
+void resizing(Image& primary, string &name);
 void filters_menu(Image & primary, string &name);
 void asking_for_saving(Image& primary, string &name);
 string valid_choice(string filter_choice);
@@ -90,12 +90,8 @@ void filter_choices(string filter_choice, Image& primary, string &name){
     else if(filter_choice=="9"){
         adding_frame(primary,name);
     }
-
     else if (filter_choice == "11"){
         resizing(primary, name);;
-    }
-    else if(filter_choice=="15"){
-        Infra_Red(primary,name);
     }
     else if(filter_choice=="16"){
         cout<<"Thanks for using our image filters application"<<endl;
@@ -114,7 +110,6 @@ string valid_choice(string filter_choice){
         else if(filter_choice == "7")break;
         else if(filter_choice == "9")break;
         else if(filter_choice == "11")break;
-        else if(filter_choice == "15")break;
         else if(filter_choice == "16"){
             cout<<"Thanks for using our image filter application"<<endl;
             exit(0);
@@ -166,7 +161,7 @@ void filters_menu(Image & primary, string &name){
     cout<<"7. Darken and Lighten Image"<<endl;
     cout<<"9. Adding frame"<<endl;
     cout<<"11. Resizing"<<endl;
-    cout<<"15. Infra_Red"<<endl;
+
     cout<<"16. Exit"<<endl<<endl;
     cout<<"Please enter your filter choice: "<<endl;
     string filter_choice;
@@ -572,7 +567,6 @@ void lighten_darken_image(Image &primary, string&name){
     string filter_choice;
     cin>>filter_choice;
     filter_choice=choice_load_save(filter_choice);
-    // add 50% of the pixel colour to the pixel colour to lighten image
     if(filter_choice=="1"){
         for(int i=0; i<primary.width; i++){
             for(int j=0; j<primary.height; j++){
@@ -587,7 +581,6 @@ void lighten_darken_image(Image &primary, string&name){
             }
         }
     }
-    // decrease pixel colour to 50% pixel colour
     else if(filter_choice=="2"){
         for(int i=0; i<primary.width; i++){
             for(int j=0; j<primary.height; j++){
@@ -780,15 +773,18 @@ void adding_frame(Image& primary, string& name) {
     int x = primary.height;
     int y = primary.width;
     int frameSize;
+    if(x<1000||y<1000){
+        frameSize = 15;
+    }
+    else if((x>1000||x<3000)&&(y>1000||y<3000)){
+        frameSize = 100;
+    }
     string choose;
-    cout << "Enter size of frame: ";
-    cin >> frameSize;
     cout << "Height: " << x << " , Width: " << y << endl;
     cout << "1: simple frame\n";
     cout << "2: fancy frame\n";
     cout << "Choose between 1 & 2: ";
     cin >> choose;
-
     while (choose != "1" && choose != "2") {
         cout << "Invalid choice\n";
         cout << "1: simple frame\n";
@@ -796,17 +792,14 @@ void adding_frame(Image& primary, string& name) {
         cout << "Choose between 1 & 2: ";
         cin >> choose;
     }
-
     Image added_frame(y, x);
     string framecolor;
-
     if (choose == "1") {
         cout << "1: red frame\n";
         cout << "2: blue frame\n";
         cout << "3: green frame\n";
         cout << "Choose between 1 & 2 & 3: ";
         cin >> framecolor;
-
         while (framecolor != "1" && framecolor != "2" && framecolor != "3") {
             cout << "Invalid choice\n";
             cout << "1: red frame\n";
@@ -815,7 +808,6 @@ void adding_frame(Image& primary, string& name) {
             cout << "Choose between 1 & 2 & 3: ";
             cin >> framecolor;
         }
-
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {
                 if (framecolor == "1") {
@@ -828,7 +820,7 @@ void adding_frame(Image& primary, string& name) {
                         added_frame(i, j, 1) = primary(i, j, 1);
                         added_frame(i, j, 2) = primary(i, j, 2);
                     }
-                    asking_for_saving(added_frame, name);
+                            asking_for_saving(added_frame, name);
                 } else if (framecolor == "2") {
                     if (i < frameSize || i >= y - frameSize || j < frameSize || j >= x - frameSize) {
                         added_frame(i, j, 0) = 0;
@@ -839,7 +831,7 @@ void adding_frame(Image& primary, string& name) {
                         added_frame(i, j, 1) = primary(i, j, 1);
                         added_frame(i, j, 2) = primary(i, j, 2);
                     }
-                    asking_for_saving(added_frame, name);
+                        asking_for_saving(added_frame, name);
                 } else if (framecolor == "3") {
                     if (i < frameSize || i >= y - frameSize || j < frameSize || j >= x - frameSize) {
                         added_frame(i, j, 0) = 0;
@@ -853,73 +845,61 @@ void adding_frame(Image& primary, string& name) {
                 }
             }
         }
-        asking_for_saving(added_frame, name);
+                    asking_for_saving(added_frame, name);
 
     }
     else if (choose == "2") {
-        string framecolor_2;
-        cout<<"1: black and white\n";
-        cout<<"2: colored frame\n";
-        cout<<"choose between 1&2: ";
-        cin>>framecolor_2;
-        while(framecolor_2!="1"&&framecolor_2!="2"){
-            cout<<"invalid choice\n";
+            string framecolor_2;
             cout<<"1: black and white\n";
             cout<<"2: colored frame\n";
             cout<<"choose between 1&2: ";
             cin>>framecolor_2;
-        }
-        if(framecolor_2=="1"){
+            while(framecolor_2!="1"&&framecolor_2!="2"){
+                cout<<"invalid choice\n";
+                cout<<"1: black and white\n";
+                cout<<"2: colored frame\n";
+                cout<<"choose between 1&2: ";
+                cin>>framecolor_2;
+            }
+            if(framecolor_2=="1"){
             for (int i = 0; i < y; i++) {
                 for (int j = 0; j < x; j++) {
                     int random_value = rand() % 2 * 255;
 
                     if (i < frameSize || i >= y - frameSize || j < frameSize || j >= x - frameSize) {
-                        added_frame(i, j, 0) = random_value;
-                        added_frame(i, j, 1) = random_value;
-                        added_frame(i, j, 2) = random_value;
-                    }
-                    else {
-                        added_frame(i, j, 0) = primary(i, j, 0);
-                        added_frame(i, j, 1) = primary(i, j, 1);
-                        added_frame(i, j, 2) = primary(i, j, 2);
-                    }
+                    added_frame(i, j, 0) = random_value;
+                    added_frame(i, j, 1) = random_value;
+                    added_frame(i, j, 2) = random_value;
                 }
-            }
-            asking_for_saving(added_frame, name);
-        }
-        if(framecolor_2=="2"){
-            int frame = 0;
-            for (int i = 0; i < y; i++) {
-                for (int j = 0; j < x; j++) {
-                    frame+=primary(i,j,0);
-                    frame+=primary(i,j,1);
-                    frame+=primary(i,j,2);
-                    frame%=127;
-                    if (i < frameSize || i >= y - frameSize || j < frameSize || j >= x - frameSize) {
-                        added_frame(i, j, 0) = frame+17;    // Red
-                        added_frame(i, j, 1) = frame+140;    // Green
-                        added_frame(i, j, 2) = frame+146;  // Blue
-                    } else {
-                        added_frame(i, j, 0) = primary(i, j, 0);
-                        added_frame(i, j, 1) = primary(i, j, 1);
-                        added_frame(i, j, 2) = primary(i, j, 2);
-                    }
+                else {
+                    added_frame(i, j, 0) = primary(i, j, 0);
+                    added_frame(i, j, 1) = primary(i, j, 1);
+                    added_frame(i, j, 2) = primary(i, j, 2);
                 }
             }
         }
         asking_for_saving(added_frame, name);
-    }
 }
-
-void Infra_Red(Image& primary, string& name){
-    // loop on each pixel, make G and B colours=255-original Red colour then make New Red color=255
-    for(int i=0; i<primary.width; i++){
-        for(int j=0; j<primary.height; j++){
-                primary(i,j,1)=255-primary(i,j,0);
-                primary(i,j,2)=255-primary(i,j,0);
-                primary(i,j,0)=255;
+        if(framecolor_2=="2"){
+            int frame = 0;
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                frame+=primary(i,j,0);
+                frame+=primary(i,j,1);
+                frame+=primary(i,j,2);
+                frame%=127;
+                if (i < frameSize || i >= y - frameSize || j < frameSize || j >= x - frameSize) {
+                    added_frame(i, j, 0) = frame+17;    // Red
+                    added_frame(i, j, 1) = frame+140;    // Green
+                    added_frame(i, j, 2) = frame+146;  // Blue
+                } else {
+                    added_frame(i, j, 0) = primary(i, j, 0);
+                    added_frame(i, j, 1) = primary(i, j, 1);
+                    added_frame(i, j, 2) = primary(i, j, 2);
+        }
+        }
         }
     }
-    asking_for_saving(primary, name);
+            asking_for_saving(added_frame, name);
+    }
 }
