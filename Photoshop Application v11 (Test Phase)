@@ -811,8 +811,13 @@ void resizing(Image& primary, string &name){
             cout << "Invalid input: width and height must be positive integers" << endl;
         }
 
+        if (width_scale > 20000 || height_scale > 20000){
+            cout << "This would be an excessive change in size and would be impossible to formulate currently or would take too much time. Please enter a smaller size" << endl;
+            continue;
+        }
+
         // Continue the loop until a valid scale is entered
-    } while (!(regex_search(scale, matches, pattern) && width_scale > 0 && height_scale > 0));
+    } while (!(regex_search(scale, matches, pattern) && width_scale > 0 && height_scale > 0) || width_scale > 20000 || height_scale > 20000);
 
     // Use the width and height scale factors
     // declare the resizing variables
