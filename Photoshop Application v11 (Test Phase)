@@ -1250,7 +1250,7 @@ void crop(Image& primary, string &name){
     }while(!(choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5"));
 
 // Define a regex pattern for matching the scale format (width*height)
-    regex pattern(R"((\d+)[*](\d+))");
+    regex pattern(R"((\d+)\*(\d+))");
 
 // Declare variables for the width and height scale factors
     int width_scale, height_scale;
@@ -1259,38 +1259,30 @@ void crop(Image& primary, string &name){
     do {
         // Prompt the user to enter the scale
         cout << "Enter the size you want in (format: width*height):\n";
-        cin.ignore();
         getline(cin, scale);
 
-        // Reset the match object before each search
-
-        // Check if the input matches1 the regex pattern
-        if (!regex_search(scale, matches, pattern)) {
+        // Check if the input matches the regex pattern
+        if (!regex_search(scale, pattern)) {
             // If the input does not match the pattern, print an error message and continue the loop
             cout << "Invalid input format" << endl;
             continue;
         }
 
         // Extract the width and height substrings from the input
+        smatch matches;
         regex_search(scale, matches, pattern);
-        string width_str = matches.str(1);
-        string height_str = matches.str(2);
 
         // Convert the width and height substrings to integers
-        width_scale = stoi(width_str);
-        height_scale = stoi(height_str);
+        width_scale = stoi(matches[1]);
+        height_scale = stoi(matches[2]);
 
         // Check if the width and height scale factors are positive integers
         if (width_scale <= 0 || height_scale <= 0 || height_scale > primary.height || width_scale > primary.width) {
             // If the width or height scale factor is not a positive integer, print an error message
             cout << "Invalid input: width and height must be positive integers" << endl;
         }
-
-// Continue the loop until a valid scale is entered
+        // Continue the loop until a valid scale is entered
     } while (width_scale <= 0 || height_scale <= 0 || height_scale > primary.height || width_scale > primary.width);
-
-
-
 // get the new image depend on the scale input
     Image after ( width_scale, height_scale);
 
@@ -1311,9 +1303,13 @@ void crop(Image& primary, string &name){
                 cout << "Invalid input. please enter a positive number" << endl;
 
             }
+            if ((primary.width - width_point - width_scale) <= 0 || (primary.height - height_point - height_scale) <= 0){
 
+                cout << "Invalid input. please enter a valid stating points" << endl;
+
+            }
             // Continue the loop until a valid input is entered
-        } while (width_point <= 0 || height_point <= 0 || height_point > primary.height || width_point > primary.width);
+        } while (width_point <= 0 || height_point <= 0 || height_point > primary.height || width_point > primary.width || (primary.width - width_point - width_scale) <= 0 || (primary.height - height_point - height_scale) <= 0);
 
 
 
