@@ -792,12 +792,12 @@ void resizing(Image& primary, string &name){
 
 // Use a do-while loop to repeatedly prompt the user for input until a valid scale is entered
         int width_scale, height_scale;
+        cin.ignore();
 
         do {
             // Prompt the user to enter the scale
             cout << "Enter the size you want in (format: width*height):" << endl;
-
-            cin >> scale;
+            getline(cin,scale);
 
 
             // Check if the input matches the regex pattern
@@ -851,13 +851,12 @@ void resizing(Image& primary, string &name){
         string ratio;
         smatch matches;
         double ratio_d;
-
+        cin.ignore();
         do{
             // Prompt the user to enter the scale
             cout << "Enter the ratio you want in (format--> num1:num2):" << endl;
 
-            cin >> ratio;
-            cout << ratio << endl;
+            getline(cin,ratio);
             // Check if the input matches the regex pattern
             if (!regex_search(ratio, matches, pattern)) {
                 // If the input does not match the pattern, print an error message and continue the loop
@@ -1313,10 +1312,11 @@ void crop(Image& primary, string &name){
     int width_scale, height_scale;
 
 // Use a do-while loop to repeatedly prompt the user for input until a valid scale is entered
+    cin.ignore();
     do {
         // Prompt the user to enter the scale
         cout << "Enter the size you want in (format: width*height):\n";
-        cin >> scale;
+        getline(cin,scale);
 
         // Check if the input matches the regex pattern
         if (!regex_search(scale, pattern)) {
@@ -1344,14 +1344,14 @@ void crop(Image& primary, string &name){
 
     if(choice == "1"){
 
-
         long long width_point, height_point;
         string point;
+
+
         do {
             // Prompt the user to enter the scale
-            cout << "Enter the starting  point you want in (format: width*height):\n";
-            cin >> point;
-            cout << "your input: " << point << endl;
+            cout << "Enter the starting point you want in (format: width*height):\n";
+            getline(cin,point);
             // Check if the input matches the regex pattern
             if (!regex_search(point, pattern)) {
                 // If the input does not match the pattern, print an error message and continue the loop
@@ -1364,7 +1364,6 @@ void crop(Image& primary, string &name){
             width_point = stoi(matches[1]);
             height_point = stoi(matches[2]);
 
-            cout << width_point << endl << height_point << endl;
 
 
             if (width_point <= 0 || height_point <= 0 || height_point > primary.height || width_point > primary.width) {
@@ -1373,7 +1372,7 @@ void crop(Image& primary, string &name){
             }
             if ((primary.width - width_point - width_scale) <= 0 || (primary.height - height_point - height_scale) <= 0){
 
-                cout << "Invalid input. please enter a valid stating points" << endl;
+                cout << "Invalid input. please enter a valid staring points" << endl;
 
             }
             // Continue the loop until a valid input is entered
