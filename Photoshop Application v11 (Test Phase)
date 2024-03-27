@@ -772,69 +772,127 @@ void resizing(Image& primary, string &name){
      * 2 --> declare pattern to validate on it
      * 3 --> declare matches to get the height and the width individually then turn them into integer
      * 4 --> get the width scale and the height scale by the old image height and width
-     * 5 --> resize
+     * 5 --> or make it by the ratio
+     * 6 --> resize
      * */
+    string choice;
+    do{
+        cout << "Please select\n1 to resize by ratio\n2 to resize by diminutions" << endl;
+        cin >> choice;
+        if(!(choice  == "2" || choice == "1")){cout << "Invalid input" << endl;}
+    }while (!(choice  == "2" || choice == "1"));
 
-
-// Declare variables for the scale and dimensions
-    string scale;
-    int ht, wd;
-    smatch matches;
+    if (choice == "2"){// Declare variables for the scale and dimensions
+        string scale;
+        int ht, wd;
+        smatch matches;
 
 // Define a regex pattern for matching the scale format (width*height)
-    regex pattern(R"((\d+)\*(\d+))");
+        regex pattern(R"((\d+)\*(\d+))");
 
 // Use a do-while loop to repeatedly prompt the user for input until a valid scale is entered
-    int width_scale, height_scale;
+        int width_scale, height_scale;
 
-    do {
-        // Prompt the user to enter the scale
-        cout << "Enter the size you want in (format: width*height):" << endl;
+        do {
+            // Prompt the user to enter the scale
+            cout << "Enter the size you want in (format: width*height):" << endl;
 
-        cin >> scale;
+            cin >> scale;
 
 
-        // Check if the input matches the regex pattern
-        if (!regex_search(scale, matches, pattern)) {
-            // If the input does not match the pattern, print an error message and continue the loop
-            cout << "Invalid input format" << endl;
-            continue;
+            // Check if the input matches the regex pattern
+            if (!regex_search(scale, matches, pattern)) {
+                // If the input does not match the pattern, print an error message and continue the loop
+                cout << "Invalid input format" << endl;
+                continue;
+            }
+
+            // Extract the width and height substrings from the input
+            width_scale = stoi(matches[1]);
+            height_scale = stoi(matches[2]);
+
+            // Check if the width and height scale factors are positive integers
+            if (width_scale <= 0 || height_scale <= 0) {
+                // If the width or height scale factor is not a positive integer, print an error message
+                cout << "Invalid input: width and height must be positive integers" << endl;
+            }
+
+            if (width_scale > 20000 || height_scale > 20000) {
+                cout<< "This would be an excessive change in size and would be impossible to formulate currently or would take too much time. Please enter a smaller size"<< endl;
+                continue;
+            }
+
+            // Continue the loop until a valid scale is entered
+        } while (!(regex_search(scale, matches, pattern) && width_scale > 0 && height_scale > 0) ||
+                 width_scale > 20000 || height_scale > 20000);
+
+        // Use the width and height scale factors
+        // declare the resizing variables
+        double h = (height_scale / 1.0) / (primary.height / 1.0), w = (width_scale / 1.0) / (primary.width / 1.0);
+
+        // get the new image depend on the scale input
+        Image after(width_scale, height_scale);
+
+        // this loop use to get the new image by resizing the old one
+        for (int i = 0; i < after.width; i++) {
+            for (int j = 0; j < after.height; j++) {
+                after(i, j, 0) = primary(i / w, j / h, 0);
+                after(i, j, 1) = primary(i / w, j / h, 1);
+                after(i, j, 2) = primary(i / w, j / h, 2);
+
+            }
         }
 
-        // Extract the width and height substrings from the input
-        width_scale = stoi(matches[1]);
-        height_scale = stoi(matches[2]);
 
-        // Check if the width and height scale factors are positive integers
-        if (width_scale <= 0 || height_scale <= 0) {
-            // If the width or height scale factor is not a positive integer, print an error message
-            cout << "Invalid input: width and height must be positive integers" << endl;
+        asking_for_saving(after, name);
+    }else{
+
+        regex pattern(R"((\d+)\:(\d+))");
+        string ratio;
+        smatch matches;
+        double ratio_d;
+
+        do{
+            // Prompt the user to enter the scale
+            cout << "Enter the ratio you want in (format--> num1:num2):" << endl;
+
+            cin >> ratio;
+            cout << ratio << endl;
+            // Check if the input matches the regex pattern
+            if (!regex_search(ratio, matches, pattern)) {
+                // If the input does not match the pattern, print an error message and continue the loop
+                cout << "Invalid input format" << endl;
+                continue;
+            }
+
+            // Extract the ratio and transform ir into double
+
+            regex_search(ratio, matches, pattern);
+            ratio_d = stod(matches[1])/stod(matches[2]);
+
+        }while(!regex_search(ratio, matches, pattern) || ratio_d == 0 || matches[2] == "0");
+
+
+        // get the new image the ratio
+        Image after(primary.width * ratio_d, primary.height * ratio_d);
+
+        // this loop use to get the new image by resizing the old one
+        for (int i = 0; i < after.width; i++) {
+            for (int j = 0; j < after.height; j++) {
+                after(i, j, 0) = primary(i / ratio_d, j / ratio_d, 0);
+                after(i, j, 1) = primary(i / ratio_d, j / ratio_d, 1);
+                after(i, j, 2) = primary(i / ratio_d, j / ratio_d, 2);
+
+            }
         }
 
-        if (width_scale > 20000 || height_scale > 20000){
-            cout << "This would be an excessive change in size and would be impossible to formulate currently or would take too much time. Please enter a smaller size" << endl;
-            continue;
-        }
 
-        // Continue the loop until a valid scale is entered
-    } while (!(regex_search(scale, matches, pattern) && width_scale > 0 && height_scale > 0) || width_scale > 20000 || height_scale > 20000);
+        asking_for_saving(after, name);
 
-    // Use the width and height scale factors
-    // declare the resizing variables
-    double h = (height_scale/1.0)/(primary.height/1.0) ,w = (width_scale/1.0)/(primary.width/1.0);
 
-    // get the new image depend on the scale input
-    Image after ( width_scale, height_scale);
-
-    // this loop use to get the new image by resizing the old one
-    for(int i = 0 ; i < after.width ; i++){
-        for(int j = 0 ; j < after.height ; j++){
-            after(i,j,0) = primary(i/w,j/h,0);
-            after(i,j,1) = primary(i/w,j/h,1);
-            after(i,j,2) = primary(i/w,j/h,2);
-
-        }
     }
+
+}
 
 
     asking_for_saving(after, name);
