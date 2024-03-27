@@ -895,9 +895,6 @@ void resizing(Image& primary, string &name){
 }
 
 
-    asking_for_saving(after, name);
-}
-
 void asking_for_saving(Image& primary, string &name){
     // see if user wants to keep filtering or save the image
     cout<<"Press 1 if you want to save the image"<<endl;
