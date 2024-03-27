@@ -1,0 +1,122 @@
+void rotate_image( Image& primary, string &name) {
+    Image rotated_image(primary.height, primary.width); // declare this photo to 90 degree's photo
+    string x,y;
+    cout<<"1: rotate by 90 degree\n";
+    cout<<"2: rotate by 180 degree\n";
+    cout<<"3: rotate by 270 degree\n";
+    cout<<"Enter your choice between 1&2&3: ";
+    cin>>x;
+    while(x!="1"&&x!="2"&&x!="3"){
+        cout<<"invalid choice\n";
+        cout<<"Enter your choice between 1&2&3: ";
+        cin>>x;
+    }
+    if(x=="2"){
+        for (int i = 0; i < primary.width; i++) {
+                for (int j = 0; j < primary.height; j++) {
+                    rotated_image(j, primary.width - 1 - i, 0) = primary(i, j, 0); //j represents the row index || primary.width - 1 - i represents the new column on matrix for red color
+                    rotated_image(j, primary.width - 1 - i, 1) = primary(i, j, 1); //j represents the row index || primary.width - 1 - i represents the new column on matrix for green color
+                    rotated_image(j, primary.width - 1 - i, 2) = primary(i, j, 2); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            Image rotated_image_2(rotated_image.height, rotated_image.width); // declare this photo that will be 180 degree's photo
+            for (int i = 0; i < rotated_image.width; i++) {
+                for (int j = 0; j < rotated_image.height; j++) {
+                    rotated_image_2(j, rotated_image.width - 1 - i, 0) = rotated_image(i, j, 0); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 1) = rotated_image(i, j, 1); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 2) = rotated_image(i, j, 2); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            asking_for_saving(rotated_image_2, name);
+        }
+    else{
+    cout<<"1: begin rotation from right: \n";
+    cout<<"2: begin rotation from left: \n";
+    cout<<"Choose between 1&2: ";
+    cin>>y;
+    while(y!="1"&&y!="2"){
+        cout<<"invalid choice\n";
+        cout<<"1: begin rotation from left: \n";
+        cout<<"2: begin rotation from right: \n";
+        cout<<"Choose between 1&2: ";
+        cin>>y;
+    }
+    if(y=="1"){ // check to begin from left
+        if(x=="1"){
+            for (int i = 0; i < primary.width; i++) {
+                for (int j = 0; j < primary.height; j++) {
+                    rotated_image(j, primary.width - 1 - i, 0) = primary(i, j, 0); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image(j, primary.width - 1 - i, 1) = primary(i, j, 1); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image(j, primary.width - 1 - i, 2) = primary(i, j, 2); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            asking_for_saving(rotated_image, name);
+        }
+        else if(x=="2"){
+            for (int i = 0; i < primary.width; i++) {
+                for (int j = 0; j < primary.height; j++) {
+                    rotated_image(j, primary.width - 1 - i, 0) = primary(i, j, 0);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image(j, primary.width - 1 - i, 1) = primary(i, j, 1);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image(j, primary.width - 1 - i, 2) = primary(i, j, 2);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            Image rotated_image_2(rotated_image.height, rotated_image.width);
+            for (int i = 0; i < rotated_image.width; i++) {
+                for (int j = 0; j < rotated_image.height; j++) {
+                    rotated_image_2(j, rotated_image.width - 1 - i, 0) = rotated_image(i, j, 0); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 1) = rotated_image(i, j, 1); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 2) = rotated_image(i, j, 2); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            Image rotated_image_3(rotated_image_2.height, rotated_image_2.width); // declare this photo that will be 270 degree's photo
+            for (int i = 0; i < rotated_image_2.width; i++) {
+                for (int j = 0; j < rotated_image_2.height; j++) {
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 0) = rotated_image_2(i, j, 0); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 1) = rotated_image_2(i, j, 1); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 2) = rotated_image_2(i, j, 2); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            asking_for_saving(rotated_image_3, name);
+        }
+    }
+    if(y=="2"){ // check to begin from right
+        if(x=="1"){
+            for (int i = 0; i < primary.width; i++) {
+                for (int j = 0; j < primary.height; j++) {
+                    rotated_image(j, primary.width - 1 - i, 0) = primary(i, j, 0);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image(j, primary.width - 1 - i, 1) = primary(i, j, 1);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image(j, primary.width - 1 - i, 2) = primary(i, j, 2);  //j represents the row index || primary.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            Image rotated_image_2(rotated_image.height, rotated_image.width);
+            for (int i = 0; i < rotated_image.width; i++) {
+                for (int j = 0; j < rotated_image.height; j++) {
+                    rotated_image_2(j, rotated_image.width - 1 - i, 0) = rotated_image(i, j, 0); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 1) = rotated_image(i, j, 1); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image_2(j, rotated_image.width - 1 - i, 2) = rotated_image(i, j, 2); //j represents the row index || rotated_image.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            Image rotated_image_3(rotated_image_2.height, rotated_image_2.width); // declare this photo that will be 270 degree's photo
+            for (int i = 0; i < rotated_image_2.width; i++) {
+                for (int j = 0; j < rotated_image_2.height; j++) {
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 0) = rotated_image_2(i, j, 0); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 1) = rotated_image_2(i, j, 1); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image_3(j, rotated_image_2.width - 1 - i, 2) = rotated_image_2(i, j, 2); //j represents the row index || rotated_image_2.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            asking_for_saving(rotated_image_3, name);
+        }
+        if(x=="2"){
+            for (int i = 0; i < primary.width; i++) {
+                for (int j = 0; j < primary.height; j++) {
+                    rotated_image(j, primary.width - 1 - i, 0) = primary(i, j, 0); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for red color
+                    rotated_image(j, primary.width - 1 - i, 1) = primary(i, j, 1); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for green color
+                    rotated_image(j, primary.width - 1 - i, 2) = primary(i, j, 2); //j represents the row index || primary.width - 1 - i represents the new column index on matrix for blue color
+                }
+            }
+            asking_for_saving(rotated_image, name);
+        }
+    }
+    }
+
+}
