@@ -782,17 +782,17 @@ void resizing(Image& primary, string &name){
     smatch matches;
 
 // Define a regex pattern for matching the scale format (width*height)
-    regex pattern(R"((\d+)[*](\d+))");
-
-// Declare variables for the width and height scale factors
-    int width_scale, height_scale;
+    regex pattern(R"((\d+)\*(\d+))");
 
 // Use a do-while loop to repeatedly prompt the user for input until a valid scale is entered
+    int width_scale, height_scale;
+
     do {
         // Prompt the user to enter the scale
-        cout << "Enter the size you want in (format: width*height): ";
-        cin.ignore();
-        getline(cin, scale);
+        cout << "Enter the size you want in (format: width*height):" << endl;
+
+        cin >> scale;
+
 
         // Check if the input matches the regex pattern
         if (!regex_search(scale, matches, pattern)) {
@@ -802,13 +802,8 @@ void resizing(Image& primary, string &name){
         }
 
         // Extract the width and height substrings from the input
-        regex_search(scale, matches, pattern);
-        string width_str = matches.str(1);
-        string height_str = matches.str(2);
-
-        // Convert the width and height substrings to integers
-        width_scale = stoi(width_str);
-        height_scale = stoi(height_str);
+        width_scale = stoi(matches[1]);
+        height_scale = stoi(matches[2]);
 
         // Check if the width and height scale factors are positive integers
         if (width_scale <= 0 || height_scale <= 0) {
@@ -816,9 +811,10 @@ void resizing(Image& primary, string &name){
             cout << "Invalid input: width and height must be positive integers" << endl;
         }
 
-// Continue the loop until a valid scale is entered
-    } while (!regex_search(scale, matches, pattern) || width_scale <= 0 || height_scale <= 0);
+        // Continue the loop until a valid scale is entered
+    } while (!(regex_search(scale, matches, pattern) && width_scale > 0 && height_scale > 0));
 
+    // Use the width and height scale factors
     // declare the resizing variables
     double h = (height_scale/1.0)/(primary.height/1.0) ,w = (width_scale/1.0)/(primary.width/1.0);
 
@@ -1232,6 +1228,7 @@ void detect_edge(Image& primary, string& name){
         asking_for_saving(gradients,name);
     }
 }
+
 void crop(Image& primary, string &name){
 
 // Declare variables for the scale and dimensions
@@ -1259,7 +1256,7 @@ void crop(Image& primary, string &name){
     do {
         // Prompt the user to enter the scale
         cout << "Enter the size you want in (format: width*height):\n";
-        getline(cin, scale);
+        cin >> scale;
 
         // Check if the input matches the regex pattern
         if (!regex_search(scale, pattern)) {
@@ -1269,7 +1266,6 @@ void crop(Image& primary, string &name){
         }
 
         // Extract the width and height substrings from the input
-        smatch matches;
         regex_search(scale, matches, pattern);
 
         // Convert the width and height substrings to integers
@@ -1292,13 +1288,25 @@ void crop(Image& primary, string &name){
         long long width_point, height_point;
         string point;
         do {
+            // Prompt the user to enter the scale
+            cout << "Enter the starting  point you want in (format: width*height):\n";
+            cin >> point;
+            cout << "your input: " << point << endl;
+            // Check if the input matches the regex pattern
+            if (!regex_search(point, pattern)) {
+                // If the input does not match the pattern, print an error message and continue the loop
+                cout << "Invalid input format" << endl;
+                continue;
+            }
 
-            cout << "Enter the starting point you want in:\n";
+            regex_search(point, matches,pattern);
+            // Convert the width point, and height point substrings to integers
+            width_point = stoi(matches[1]);
+            height_point = stoi(matches[2]);
 
-            cout << "enter the width point" << endl;
-            width_point = check_for_string();
-            cout << "enter the height point" << endl;
-            height_point = check_for_string();
+            cout << width_point << endl << height_point << endl;
+
+
             if (width_point <= 0 || height_point <= 0 || height_point > primary.height || width_point > primary.width) {
                 cout << "Invalid input. please enter a positive number" << endl;
 
@@ -1309,7 +1317,7 @@ void crop(Image& primary, string &name){
 
             }
             // Continue the loop until a valid input is entered
-        } while (width_point <= 0 || height_point <= 0 || height_point > primary.height || width_point > primary.width || (primary.width - width_point - width_scale) <= 0 || (primary.height - height_point - height_scale) <= 0);
+        } while (width_point < 0 || height_point < 0 || height_point > primary.height || width_point > primary.width || (primary.width - width_point - width_scale) <= 0 || (primary.height - height_point - height_scale) <= 0);
 
 
 
@@ -1382,6 +1390,7 @@ void crop(Image& primary, string &name){
 
 
 }
+
 
 int check_for_string() {
     //to validate for the row and column is string or no
