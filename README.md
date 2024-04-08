@@ -1,10 +1,12 @@
 <div align='center'>
 
-<h1>image filters using cpp</h1>
-<p>
-  This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.</p>
-<p>The filters in this repository are:</p>
-- Grayscale
+# Image Filters using CPP
+
+This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.
+
+The filters in this repository are:
+
+- [Grayscale](#grayscale)
 - Black and white filter
 - Reverse the image
 - Merge two images
@@ -21,25 +23,33 @@
 - Sunny filter
 - Upload a new photo
 - Save the image
-The program starts with a welcome message, then asks the user to enter the name of the image he wants to upload, then a list of filters appears for the user to choose from
-You can apply more than one filter
-You can save whatever you want at any time after applying the filter
-You can save it in the same file or create a new file
-After saving your photo, you can upload a new photo
 
+The program starts with a welcome message, then asks the user to enter the name of the image they want to upload. A list of filters then appears for the user to choose from. You can apply more than one filter. You can save whatever you want at any time after applying the filter. You can save it in the same file or create a new file. After saving your photo, you can upload a new photo.
 
-<h4> <span> · </span> <a href="https://github.com/ Amr-Khaled-Ahmed/Photo-editor/blob/master/README.md"> Documentation </a> <span> · </span> <a href="https://github.com/ Amr-Khaled-Ahmed/Photo-editor/issues"> Report Bug </a> <span> · </span> <a href="https://github.com/ Amr-Khaled-Ahmed/Photo-editor/issues"> Request Feature </a> </h4>
+## Filters
 
+### Grayscale
 
+The Grayscale filter converts the image to a grayscale color scheme.
 
+## Documentation
 
+For more information, please refer to the [documentation](https://github.com/Amr-Khaled-Ahmed/Photo-editor/blob/master/README.md).
 
+## Report Bug
 
+To report a bug, please open an issue in our [issue tracker](https://github.com/Amr-Khaled-Ahmed/Photo-editor/issues).
 
-## :wave: Contributing
-<p>The engineers who collaborated together to create the project helped me</p>
+## Request Feature
+
+To request a feature, please open an issue in our [issue tracker](https://github.com/Amr-Khaled-Ahmed/Photo-editor/issues).
+
+## Contributing
+
+The engineers who collaborated together to create the project helped me:
 
 - [Youssef Amgad Elkhatib](https://github.com/YoussefElkhatib)
 - [Mohamed Ahmed](https://github.com/mohamedahmed2005)
 - [Amr Khaled Ahmed](https://github.com/Amr-Khaled-Ahmed)
 
+</div>
