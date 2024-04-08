@@ -5,25 +5,23 @@
   This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.</p>
 <p>The filters in this repository are:</p>
 <p>
-<li>
-1. Grayscale
-2. Black and white filter
-3. Reverse the image
-4. Merge two images
-5. Flip the image
-6. Rotate the image
-7. Darken and lighten the image
-8. Crop the image
-9. Add the frame
-10. Edge detection
-11. Change size
-12. Infrared rays
-13. Magenta filter
-14. Blur the image
-15. Sunny filter
-16. Upload a new photo
-17. Save the image
-  </li>
+- Grayscale
+- Black and white filter
+- Reverse the image
+- Merge two images
+- Flip the image
+- Rotate the image
+- Darken and lighten the image
+- Crop the image
+- Add the frame
+- Edge detection
+- Change size
+- Infrared rays
+- Magenta filter
+- Blur the image
+- Sunny filter
+- Upload a new photo
+- Save the image
 </p>
 The program starts with a welcome message, then asks the user to enter the name of the image he wants to upload, then a list of filters appears for the user to choose from
 You can apply more than one filter
