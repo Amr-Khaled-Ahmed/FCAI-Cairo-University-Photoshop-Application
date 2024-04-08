@@ -24,8 +24,13 @@ The filters in this repository are:
 - Sunny filter
 - Upload a new photo
 - Save the image
-
-The program starts with a welcome message, then asks the user to enter the name of the image they want to upload. A list of filters then appears for the user to choose from. You can apply more than one filter. You can save whatever you want at any time after applying the filter. You can save it in the same file or create a new file. After saving your photo, you can upload a new photo.
+##Program Features
+The program starts with a welcome message, then asks the user to enter the name of the image they want to upload. 
+A list of filters then appears for the user to choose from. 
+You can apply more than one filter. 
+You can save whatever you want at any time after applying the filter. 
+You can save it in the same file or create a new file. 
+After saving your photo, you can upload a new photo.
 
 ## Filters
 
@@ -47,7 +52,7 @@ To request a feature, please open an issue in our [issue tracker](https://github
 
 ## Contributing
 
-The engineers who collaborated together to create the project helped me:
+The engineers who collaborated together to create the program:
 
 - [Youssef Amgad Elkhatib](https://github.com/YoussefElkhatib)
 - [Mohamed Ahmed](https://github.com/mohamedahmed2005)
