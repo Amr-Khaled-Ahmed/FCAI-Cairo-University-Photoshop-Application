@@ -24,8 +24,7 @@ The filters in this program are:
 - Magenta filter
 - Blur the image
 - Sunny filter
-- Upload a new photo
-- Save the image
+
 
 ## Program Features
 - The program starts with a welcome message, then asks the user to enter the name of the image they want to upload. 
