@@ -12,13 +12,10 @@
 
 
 ## :wave: Contributing
-Youssef Amgad
-Mohamed Ahmed
-- [Youssef Amgad](https://github.com/YoussefAmgad)
-- [Mohamed Ahmed](https://github.com/MohamedAhmed17)
+<p>The engineers who collaborated together to create the project helped me</p>
+
+- [Youssef Amgad Elkhatib](https://github.com/YoussefElkhatib)
+- [Mohamed Ahmed](https://github.com/mohamedahmed2005)
+- [Amr Khaled Ahmed](https://github.com/Amr-Khaled-Ahmed)
 
 <a href="https://github.com/Amr-Khaled-Ahmed/Photo-editor.git/graphs/contributors"> <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" /> </a>
-
-Contributions are always welcome!
-
-see `contributing.md` for ways to get started
