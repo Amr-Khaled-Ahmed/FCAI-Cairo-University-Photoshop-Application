@@ -5,7 +5,7 @@
   This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.</p>
 <p>The filters in this repository are:</p>
 <p>
-<ol>
+<li>
 1. Grayscale
 2. Black and white filter
 3. Reverse the image
@@ -23,7 +23,7 @@
 15. Sunny filter
 16. Upload a new photo
 17. Save the image
-</ol>
+  </li>
 </p>
 The program starts with a welcome message, then asks the user to enter the name of the image he wants to upload, then a list of filters appears for the user to choose from
 You can apply more than one filter
