@@ -5,7 +5,7 @@
 This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.
 
 The filters in this repository are:
-
+<div align='left'>
 - Grayscale
 - Black and white filter
 - Reverse the image
