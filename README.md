@@ -3,9 +3,10 @@
 # Image Filters using CPP
 
 This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.
+</div>
 
 The filters in this repository are:
-<div align='left'>
+
 - Grayscale
 - Black and white filter
 - Reverse the image
@@ -52,4 +53,3 @@ The engineers who collaborated together to create the project helped me:
 - [Mohamed Ahmed](https://github.com/mohamedahmed2005)
 - [Amr Khaled Ahmed](https://github.com/Amr-Khaled-Ahmed)
 
-</div>
