@@ -6,7 +6,7 @@ This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to a
 
 The filters in this repository are:
 
-- [Grayscale](#grayscale)
+- Grayscale
 - Black and white filter
 - Reverse the image
 - Merge two images
