@@ -1,5 +1,5 @@
 /*
-File name: CS112_A3_Part2B_20230482_S18_20231134_S17_20231116_S17.cpp
+File name: CS112_A3_Part1_20230482_S18_20231134_S17_20231116_S17.cpp
 Purpose: Photoshop Application that filters images
 Teaching assistant: Eng/Ahmed Lotfi
 Authors:
@@ -1246,14 +1246,15 @@ void Infra_Red(Image& primary, string& name){
 void detect_edge(Image& primary, string& name){
 
 //     //if the pixel channel color was under 127 make it 0 else make it 255
-    int avg = 0;
+
     for(int i=0; i<primary.width; i++){
         for(int j=0; j<primary.height; j++){
+           unsigned int avg = 0;
             for (int k = 0; k < primary.channels; k++)
-                avg = +primary(i, j, k);
+                avg +=primary(i, j, k);
 
-            avg = avg%256;
-            if(avg > 128){
+            avg/=3;
+            if(avg >= 128){
                 primary(i,j,0) = 255;
                 primary(i,j,1) = 255;
                 primary(i,j,2) = 255;
@@ -1270,7 +1271,7 @@ void detect_edge(Image& primary, string& name){
     string choice;
     cout<<"1. Roberts operator technique"<<endl;
     cout<<"2. Sobel operator technique"<<endl;
-    cout<<"3. Normal technique"<<endl<<endl;
+    cout<<"3. Simple technique"<<endl<<endl;
     cout<<"Enter 1 or 2 or 3"<<endl;
     cin>>choice;
     while(true){
@@ -1309,11 +1310,11 @@ void detect_edge(Image& primary, string& name){
     }
         // Sobel technique (3*3) gradient
     else if(choice=="2"){
-        Image gradients(primary.width, primary.height);
+        Image secondary(primary.width, primary.height);
         for (int i = 1; i < primary.width - 1; i++) {
             for (int j = 1; j < primary.height - 1; j++) {
                 for (int k = 0; k < primary.channels; k++) {
-                    gradients(i, j, k) = abs(primary(i + 1, j - 1, k) + 2 * primary(i + 1, j, k) + primary(i + 1, j + 1, k)
+                    secondary(i, j, k) = abs(primary(i + 1, j - 1, k) + 2 * primary(i + 1, j, k) + primary(i + 1, j + 1, k)
                                              - primary(i - 1, j - 1, k) - 2 * primary(i - 1, j, k) - primary(i - 1, j + 1, k))
                                          + abs(primary(i - 1, j + 1, k) + 2 * primary(i, j + 1, k) + primary(i + 1, j + 1, k)
                                                - primary(i - 1, j - 1, k) - 2 * primary(i, j - 1, k) - primary(i + 1, j - 1, k));
@@ -1321,61 +1322,40 @@ void detect_edge(Image& primary, string& name){
             }
         }
         // switching black and white
-        for(int i=0; i<gradients.width; i++){
-            for(int j=0; j<gradients.height; j++){
-                for(int k=0; k<gradients.channels; k++){
-                    if(gradients(i,j,k)==0){
-                        gradients(i,j,k)=255;
+        for(int i=0; i<secondary.width; i++){
+            for(int j=0; j<secondary.height; j++){
+                for(int k=0; k<secondary.channels; k++){
+                    if(secondary(i,j,k)==0){
+                        secondary(i,j,k)=255;
                     }
                     else{
-                        gradients(i,j,k)=0;
+                        secondary(i,j,k)=0;
                     }
                 }
             }
         }
-        asking_for_saving(gradients,name);
+        asking_for_saving(secondary,name);
     }
     else{
         Image secondary(primary.width, primary.height);
 
-        for (int i = 2; i < primary.width - 2; i++) {
-            for (int j = 2; j < primary.height - 2; j++) {
-                // Check if current pixel is black
-                if (primary(i, j, 0) == 0) {
-                    // Check if any neighboring pixel is white in a 5*5 range
-                    bool isEdge = false;
-                    for (int dx = -2; dx <= 2; dx++) {
-                        for (int dy = -2; dy <= 2; dy++) {
-                            if (dx != 0 || dy != 0) {  // Exclude the current pixel
-                                if (primary(i + dx, j + dy, 0) == 255) {
-                                    isEdge = true;
-                                    break;
-                                }
-                            }
-                        }
-                        if (isEdge) {
-                            break;
-                        }
-                    }
-                    // Set edge pixel to black if any neighboring pixel is white
-                    if (isEdge) {
-                        secondary(i, j, 0) = 0;
-                        secondary(i, j, 1) = 0;
-                        secondary(i, j, 2) = 0;
-                    } else {
-                        // Set non-edge pixel to white
-                        secondary(i, j, 0) = 255;
-                        secondary(i, j, 1) = 255;
-                        secondary(i, j, 2) = 255;
-                    }
-                } else {
-                    // Set non-black pixel to white
-                    secondary(i, j, 0) = 255;
-                    secondary(i, j, 1) = 255;
-                    secondary(i, j, 2) = 255;
+        // checking neighbouring pixels (up,right,left,down) if they are white then consider it an edge if the pixel is black, else it is white
+        for(int i=1; i<primary.width-1; i++){
+            for(int j=1; j<primary.height-1; j++){
+                if((primary(i+1,j,0)==255 || primary(i-1,j,0)==255 || primary(i,j+1,0)==255 || primary(i,j-1,0)==255 || primary(i+1,j+1,0)==255 || primary(i+1,j-1,0)==255 || primary(i-1,j+1,0)==255 || primary(i-1,j-1,0)==255) && primary(i,j,0)==0){
+                    secondary(i,j,0)=0;
+                    secondary(i,j,1)=0;
+                    secondary(i,j,2)=0;
+
+                }
+                else{
+                    secondary(i,j,0)=255;
+                    secondary(i,j,1)=255;
+                    secondary(i,j,2)=255;
                 }
             }
         }
+
 
         asking_for_saving(secondary,name);
     }
