@@ -1,6 +1,6 @@
 <div align='center'>
 
-# FCAI Photoshop Application
+# FCAI Cairo University Photoshop Application
 
 This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.
 </div>
