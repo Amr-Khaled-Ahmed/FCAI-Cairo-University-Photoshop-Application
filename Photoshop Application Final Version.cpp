@@ -1,26 +1,24 @@
 /*
-File name: CS112_A3_Part1_20230482_S18_20231134_S17_20231116_S17.cpp
 Purpose: Photoshop Application that filters images
-Teaching assistant: Eng/Ahmed Lotfi
+@copyright : FCAI Cairo University
+Under supervision by Dr.Mohamed El-Ramly
+With credit to Shehab Diab, Youssef Mohamed , Nada Ahmed,  Dr Mohamed El-Ramly for creating the image class
+
 Authors:
-1. Youssef Amgad Abd Al Halim Ahmed, section 18, ID:20230482, solved grayscale,infrared,merge,lighten and darken,edge detection
+1. Youssef Amgad Abd Al Halim Ahmed made (grayscale,infrared,merge,lighten and darken,edge detection,menu)
 Emails:
 youssefamgadelkhatib@gmail.com
 11410120230482@stud.cu.edu.eg
 
-2. Amr Khaled Ahmed Abd Al Hamid Mohamed, section 17, ID:20231116, solved black and white,crop,flip,resize,purple
+2. Amr Khaled Ahmed Abd Al Hamid Mohamed made (solved black and white,crop,flip,resize,purple)
 Emails:
 yy171516@gmail.com
 11410120231116@stud.cu.edu.eg
 
-3. Mohamed Ahmed Mohamed Abd Al Wahab, section 17, ID:20231134, solved invert,frame,rotate,blur,sunny
+3. Mohamed Ahmed Mohamed Abd Al Wahab made (invert,frame,rotate,blur,sunny)
 Emails:
 ahmd.mohamed200515@gmail.com
 11410120231134@stud.cu.edu.eg
-
-system diagram link : https://drive.google.com/drive/folders/1hBaIyt5tXv7h1qtAeJwW8HEYiY32tMrz
-
-GitHub repo link: https://github.com/Amr-Khaled-Ahmed/Photo-editor
  */
 
 # include <iostream>
