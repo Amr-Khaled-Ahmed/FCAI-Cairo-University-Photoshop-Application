@@ -1,6 +1,6 @@
 <div align='center'>
 
-# Image Filters using CPP
+# FCAI Photoshop Application
 
 This repository was created by Amr Khaled, Youssef Amgad, and Mohamed Ahmed to apply some magic filters using the CPP language and an external library created by students of FCAI College in Cairo.
 </div>
