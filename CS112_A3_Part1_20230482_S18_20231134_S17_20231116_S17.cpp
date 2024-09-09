@@ -10,7 +10,7 @@ youssefamgadelkhatib@gmail.com
 
 2. Amr Khaled Ahmed Abd Al Hamid Mohamed, section 17, ID:20231116, solved black and white,crop,flip,resize
 Emails:
-yy171516@gmail.com
+amr171516@gmail.com
 11410120231116@stud.cu.edu.eg
 
 3. Mohamed Ahmed Mohamed Abd Al Wahab, section 17, ID:20231134, solved invert,frame,rotate
